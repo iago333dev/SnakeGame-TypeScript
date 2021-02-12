@@ -6,15 +6,6 @@ interface BoardProps {
   boardelements: string[][]
 }
 
-
-/*
-const SnakeCell: React.FC = ({
-
-}) => (
-  <div></div>
-);
-*/
-
 const Board: React.FC<BoardProps> = ({
   boardelements,
 }) => (
@@ -24,7 +15,7 @@ const Board: React.FC<BoardProps> = ({
         <Linha key={j}>
           {row.map((element, i) => (          
             <Quadrado key={i} state={element}>
-
+              
             </Quadrado>
           ))}
         </Linha>
@@ -32,32 +23,5 @@ const Board: React.FC<BoardProps> = ({
     </Wrapper>
   </Container>
 );
-
-/*
-const Board: React.FC<BoardProps> = () => {
-  return (
-    <Container>
-      <Linha>
-        <Quadrado />
-      </Linha>
-    </Container>
-  );
-
-  const SnakeCell = props => (
-  <div
-    style={{
-      display: "inline-block",
-      backgroundColor: cellColors[props.state],
-      width: "25px",
-      height: "25px",
-      marginLeft: "1px",
-      marginRight: "1px"
-    }}
-  />
-);
-};
-
-export default Board;
-*/
 
 export default Board;

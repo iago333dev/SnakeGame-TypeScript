@@ -23,17 +23,12 @@ function getBoard() {
 }
 
 const App: React.FC = () => {
-
   const board = getBoard();
-  console.log(board);
-  
-
   return (
       <Board boardelements={board}>        
       </Board>
   );
 };
-
 
 export default App;
   

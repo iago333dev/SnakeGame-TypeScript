@@ -21,10 +21,10 @@ export const Quadrado = styled.div<QuadradoProps>`
   width: 20px;
   height: 20px;
   border: 1px solid red; 
-
+  ${props => props.state === 'SNAKE' && `background-color: green;`}   
 `
 
 /* // 
-${props => props.state ? `NOT_SNAKE` && `background-color: green;`}
+  ${props => props.state ? `NOT_SNAKE` : `background-color: green;`}
   ${props => props.state && 'background-color: green;'};
 */
