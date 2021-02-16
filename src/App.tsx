@@ -20,7 +20,7 @@ const initialState: InitialState = {
   food: [5, 5],
   size: { x: 60, y: 28 },
   snake: [[2, 0], [1, 0], [0, 0]],
-  velocity: 2000,
+  velocity: 15,
   score: 0,
 };
 
@@ -57,7 +57,12 @@ const App: React.FC = () => {
       });
     });
 
-    board[stateOptions.food[1]][stateOptions.food[0]] = "FOOD";
+   // console.log(board);
+  //  console.log(stateOptions.food);
+
+    ///debugger;
+
+    board[stateOptions.food[0]][stateOptions.food[1]] = "FOOD";
 
     stateSnake.forEach(coords => {
       board[coords[1]][coords[0]] = "SNAKE";
@@ -121,19 +126,32 @@ const App: React.FC = () => {
     }
   };
 
-
   useEffect(() => {
     listenForKeyChanges();
 
     setTimeout(() => {
-      setStateSnake(state => {  
-        var currentHead = stateSnake[0]
-        var newHead = [currentHead[0] + stateOptions.directionX, currentHead[1] + stateOptions.directionY];
-        state = [newHead, ...stateSnake]; 
-        state.pop();
-        return state    
-      })
-    }, 1) 
+      var currentHead = stateSnake[0]
+      var newHead = [currentHead[0] + stateOptions.directionX, currentHead[1] + stateOptions.directionY];
+      var newHeadState = board[newHead[1]][newHead[0]];
+
+      if(newHeadState == "NOT_SNAKE"){
+        setStateSnake(state => {  
+          state = [newHead, ...stateSnake]; 
+          state.pop();
+          return state    
+        })
+      }else if(newHeadState == "FOOD"){
+        setStateSnake(state => {  
+          state = [newHead, ...stateSnake]; 
+          return state    
+        })
+        setStateValues(state => {  
+          state.velocity++;
+          return state;    
+        })
+        generateFood();       
+      }
+    }, stateOptions.velocity) 
   }, [stateSnake])
   let board = getBoard(stateOptions);
   console.log(board);
