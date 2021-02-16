@@ -17,11 +17,12 @@ interface QuadradoProps {
   state: string
 }
 export const Quadrado = styled.div<QuadradoProps>`
-  background-color: blue;
+  background-color: #dadada;
   width: 20px;
   height: 20px;
-  border: 1px solid red; 
-  ${props => props.state === 'SNAKE' && `background-color: green;`}   
+  border: 1px solid #fff7f7; 
+  ${props => props.state === 'SNAKE' && `background-color: #204969;`}   
+  ${props => props.state === 'FOOD' && `background-color: #08ffc8;`}
 `
 
 /* // 

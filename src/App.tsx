@@ -48,19 +48,83 @@ const App: React.FC = () => {
   const [stateOptions, setStateValues] = useState(initialState);
   const [stateSnake, setStateSnake] = useState(initialState.snake);
   
+  
+  
   function getBoard({ snake, food }: InitialState) {
     const board = [...Array(stateOptions.size.y)].map(() => {
       return [...Array(stateOptions.size.x)].map(() => {
         return "NOT_SNAKE";
       });
     });
+
+    board[stateOptions.food[1]][stateOptions.food[0]] = "FOOD";
+
     stateSnake.forEach(coords => {
       board[coords[1]][coords[0]] = "SNAKE";
     });
     return board;
-  }  
+  }
+
+  const listenForKeyChanges = () => {
+    window.addEventListener("keydown", event => {
+      const key = event.key;
+      switch (key) {
+        case "ArrowDown":
+          setStateValues(state => {  
+            state.directionX = 0;
+            state.directionY = 1;
+            return state    
+          })
+        break;
+        case "ArrowUp":
+          setStateValues(state => {  
+            state.directionX = 0;
+            state.directionY = -1;
+            return state    
+          })
+        break;
+        case "ArrowRight":
+          setStateValues(state => {  
+            state.directionX = 1;
+            state.directionY = 0;
+            return state    
+          })
+        break;
+        case "ArrowLeft":
+          setStateValues(state => {  
+            state.directionX = -1;
+            state.directionY = 0;
+            return state    
+          })
+        break;        
+      }
+    });
+  };  
+
+  function getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const generateFood = ():any => {
+    const randomX = getRandomInt(0, stateOptions.size.x);
+    const randomY = getRandomInt(0, stateOptions.size.y);
+    const board = getBoard(stateOptions);
+    const foodState = board[randomY][randomX];
+    if (foodState === "NOT_SNAKE") {
+      setStateValues(state => {  
+        state.food = [randomY,randomX]
+        return state
+      })
+     // return [randomX, randomY];
+    }else{
+      return generateFood();
+    }
+  };
+
 
   useEffect(() => {
+    listenForKeyChanges();
+
     setTimeout(() => {
       setStateSnake(state => {  
         var currentHead = stateSnake[0]
@@ -69,9 +133,11 @@ const App: React.FC = () => {
         state.pop();
         return state    
       })
-    }, 1000) 
+    }, 1) 
   }, [stateSnake])
-  let board = getBoard(stateOptions); 
+  let board = getBoard(stateOptions);
+  console.log(board);
+   
     return (
       <Board boardelements={board}>
       </Board>
