@@ -4,12 +4,14 @@ import { Container, Wrapper, Linha, Quadrado } from "./styles";
 
 interface BoardProps {
   boardelements: string[][]
+  score: number;
 }
 
 const Board: React.FC<BoardProps> = ({
-  boardelements,
+  boardelements,score
 }) => (
   <Container>
+    score:{score}
     <Wrapper>
       {boardelements.map((row, j) => (        
         <Linha key={j}>

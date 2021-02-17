@@ -18,10 +18,10 @@ const initialState: InitialState = {
   directionX: 1,
   directionY: 0,
   food: [5, 5],
-  size: { x: 60, y: 28 },
+  size: { x: 28, y: 28 },
   snake: [[2, 0], [1, 0], [0, 0]],
-  velocity: 15,
-  score: 0,
+  velocity: 5,
+  score: 1,
 };
 
 const direction: any = {
@@ -47,8 +47,7 @@ const App: React.FC = () => {
   
   const [stateOptions, setStateValues] = useState(initialState);
   const [stateSnake, setStateSnake] = useState(initialState.snake);
-  
-  
+   
   
   function getBoard({ snake, food }: InitialState) {
     const board = [...Array(stateOptions.size.y)].map(() => {
@@ -56,12 +55,6 @@ const App: React.FC = () => {
         return "NOT_SNAKE";
       });
     });
-
-   // console.log(board);
-  //  console.log(stateOptions.food);
-
-    ///debugger;
-
     board[stateOptions.food[0]][stateOptions.food[1]] = "FOOD";
 
     stateSnake.forEach(coords => {
@@ -114,51 +107,75 @@ const App: React.FC = () => {
     const randomX = getRandomInt(0, stateOptions.size.x);
     const randomY = getRandomInt(0, stateOptions.size.y);
     const board = getBoard(stateOptions);
-    const foodState = board[randomY][randomX];
-    if (foodState === "NOT_SNAKE") {
-      setStateValues(state => {  
-        state.food = [randomY,randomX]
-        return state
-      })
-     // return [randomX, randomY];
-    }else{
+
+    if(board[randomY]){
+      const foodState = board[randomY][randomX];
+      if (foodState === "NOT_SNAKE") {
+        setStateValues(state => {  
+          state.food = [randomY,randomX]
+          return state
+        })
+      }else{
+        return generateFood();
+      }
+    }
+    else{
       return generateFood();
     }
   };
 
+  const updateSpeed = () => {
+    var interval = stateOptions.velocity * 0.5; 
+
+    setStateValues(state => { 
+      clearInterval(state.velocity);
+      state.velocity = interval;
+      state.score++;
+      return state    
+    })
+  };
+
   useEffect(() => {
     listenForKeyChanges();
-
     setTimeout(() => {
       var currentHead = stateSnake[0]
       var newHead = [currentHead[0] + stateOptions.directionX, currentHead[1] + stateOptions.directionY];
-      var newHeadState = board[newHead[1]][newHead[0]];
 
+      if(!board[newHead[1]]){
+        alert("Fim de Jogo \npontuação: "+stateOptions.score); 
+        window.location.href = "/"
+      }
+      var newHeadState = board[newHead[1]][newHead[0]];
       if(newHeadState == "NOT_SNAKE"){
         setStateSnake(state => {  
           state = [newHead, ...stateSnake]; 
           state.pop();
           return state    
         })
-      }else if(newHeadState == "FOOD"){
+      }else 
+      if(newHeadState == "FOOD"){
+        //glow snake
         setStateSnake(state => {  
-          state = [newHead, ...stateSnake]; 
+          state = [newHead, ...state]; 
           return state    
         })
-        setStateValues(state => {  
-          state.velocity++;
-          return state;    
-        })
+        //glow speed & score++
+        updateSpeed();
+        //gen new food
         generateFood();       
+      }else{
+        alert("Fim de Jogo \npontuação: "+stateOptions.score); 
+        window.location.href = "/"
       }
     }, stateOptions.velocity) 
   }, [stateSnake])
   let board = getBoard(stateOptions);
-  console.log(board);
-   
+  
     return (
-      <Board boardelements={board}>
+      <div>
+      <Board boardelements={board} score={stateOptions.score}>
       </Board>
+      </div>
     );
 };
 
