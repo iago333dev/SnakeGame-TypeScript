@@ -10,9 +10,10 @@ export const Container = styled.div`
 
 export const Score = styled.div`
   margin: auto;
-  color: #fee;
+  text-align: center;
+  color: #a2a9af;
   font-size: 50px;
-  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #5cf2e8, 0 0 0.5em #5cf2e8, 0 0 0.1em #5cf2e8, 0 10px 3px #000
 `
 
 export const Wrapper = styled.div`

@@ -21,7 +21,7 @@ const initialState: InitialState = {
   size: { x: 28, y: 28 },
   snake: [[2, 0], [1, 0], [0, 0]],
   velocity: 5,
-  score: 1,
+  score: 2,
 };
 
 const direction: any = {

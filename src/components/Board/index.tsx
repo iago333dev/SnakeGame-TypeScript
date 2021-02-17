@@ -12,7 +12,10 @@ const Board: React.FC<BoardProps> = ({
 }) => (
   <Container>
     <Score>
-      Score: {score}    
+    Snake Game
+      <br>
+      </br>
+      Your Score: {score/2}    
     </Score>
 
     <Wrapper>
