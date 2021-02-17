@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, Wrapper, Linha, Quadrado } from "./styles";
+import { Container, Wrapper, Linha, Quadrado, Score } from "./styles";
 
 interface BoardProps {
   boardelements: string[][]
@@ -11,7 +11,10 @@ const Board: React.FC<BoardProps> = ({
   boardelements,score
 }) => (
   <Container>
-    score:{score}
+    <Score>
+      Score: {score}    
+    </Score>
+
     <Wrapper>
       {boardelements.map((row, j) => (        
         <Linha key={j}>

@@ -4,9 +4,17 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #3d3d3b;
+  background-color: #dadada;
 
 `
+
+export const Score = styled.div`
+  margin: auto;
+  color: #fee;
+  font-size: 50px;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000
+`
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +27,7 @@ interface QuadradoProps {
   state: string
 }
 export const Quadrado = styled.div<QuadradoProps>`
-  background-color: #dadada;
+  background-color: #3d3d3b;
   width: 20px;
   height: 20px;
   border: 1px solid #a2a9af ; 
