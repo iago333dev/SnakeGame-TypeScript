@@ -16,6 +16,8 @@ export const Linha = styled.div`
 interface QuadradoProps {
   state: string
 }
+
+
 export const Quadrado = styled.div<QuadradoProps>`
   background-color: blue;
   width: 20px;
@@ -23,6 +25,10 @@ export const Quadrado = styled.div<QuadradoProps>`
   border: 1px solid red; 
   ${props => props.state === 'SNAKE' && `background-color: green;`}   
 `
+
+
+
+
 
 /* // 
   ${props => props.state ? `NOT_SNAKE` : `background-color: green;`}

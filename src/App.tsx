@@ -13,7 +13,7 @@ interface InitialState {
   velocity: number;
   score: number;
 }
-const initialState: InitialState = {
+const initialState: InitialState ={
   directionX: 1,
   directionY: 0,
   food: [5, 5],
@@ -22,7 +22,8 @@ const initialState: InitialState = {
   velocity: 400,
   score: 0,
   
-};
+}; 
+
 
 /*
 
@@ -59,6 +60,8 @@ function getBoard({ snake, food }: InitialState) {
 }
 
 const App: React.FC = () => {
+  useState(initialState);
+
   //const [board, setBoard] = useState()
   const board = getBoard(initialState);
   
