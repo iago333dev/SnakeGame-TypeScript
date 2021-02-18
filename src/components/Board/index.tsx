@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, Wrapper, Linha, Quadrado, Score } from "./styles";
+import { Container, Wrapper, Linha, Quadrado, Score } from './styles';
 
 interface BoardProps {
   boardelements: string[][]
@@ -10,13 +10,19 @@ interface BoardProps {
 const Board: React.FC<BoardProps> = ({
   boardelements,score
 }) => (
+
   <Container>
     <Score>
-    Snake Game
+    Snake Game 
       <br>
       </br>
       Your Score: {score/2}    
+      <br>
+    </br>
+      <p>By iago333dev</p>
     </Score>
+
+    
 
     <Wrapper>
       {boardelements.map((row, j) => (        
@@ -29,7 +35,9 @@ const Board: React.FC<BoardProps> = ({
         </Linha>
       ))}
     </Wrapper>
-  </Container>
+
+  </Container>  
+
 );
 
 export default Board;

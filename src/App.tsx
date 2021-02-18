@@ -68,32 +68,40 @@ const App: React.FC = () => {
       const key = event.key;
       switch (key) {
         case "ArrowDown":
+          if(stateOptions.directionX != 0 && stateOptions.directionY != 1){
           setStateValues(state => {  
             state.directionX = 0;
             state.directionY = 1;
             return state    
           })
+        }
         break;
         case "ArrowUp":
+          if(stateOptions.directionX != 0 && stateOptions.directionY != -1){
           setStateValues(state => {  
             state.directionX = 0;
             state.directionY = -1;
             return state    
           })
+        }
         break;
         case "ArrowRight":
-          setStateValues(state => {  
-            state.directionX = 1;
-            state.directionY = 0;
-            return state    
-          })
+          if(stateOptions.directionX != 1 && stateOptions.directionY != 0){
+            setStateValues(state => {  
+              state.directionX = 1;
+              state.directionY = 0;
+              return state    
+            })
+          }
         break;
         case "ArrowLeft":
+          if(stateOptions.directionX != -1 && stateOptions.directionY != 0){
           setStateValues(state => {  
             state.directionX = -1;
             state.directionY = 0;
             return state    
           })
+        }
         break;        
       }
     });
@@ -142,7 +150,7 @@ const App: React.FC = () => {
       var newHead = [currentHead[0] + stateOptions.directionX, currentHead[1] + stateOptions.directionY];
 
       if(!board[newHead[1]]){
-        alert("Fim de Jogo \npontuação: "+stateOptions.score); 
+        alert("Fim de Jogo \npontuação: "+stateOptions.score/2); 
         window.location.href = "/"
       }
       var newHeadState = board[newHead[1]][newHead[0]];
@@ -164,7 +172,7 @@ const App: React.FC = () => {
         //gen new food
         generateFood();       
       }else{
-        alert("Fim de Jogo \npontuação: "+stateOptions.score); 
+        alert("Fim de Jogo \npontuação: "+stateOptions.score/2); 
         window.location.href = "/"
       }
     }, stateOptions.velocity) 
