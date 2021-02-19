@@ -18,9 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   },
   "include": [
     "src"
+, "components/board.tsx", "pages/_app.tsx"  ],
+  "exclude": [
+    "node_modules"
   ]
 }
